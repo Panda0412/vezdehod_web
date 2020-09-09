@@ -26,8 +26,6 @@ const Place = ({ item, order, onIncrementPosition, onDecrementPosition, area }) 
     return accounting.formatNumber(result, 0, ' ');
   }, [ order, item ]);
 
-  console.log(price==='0');
-
   return (
     <div className="Place">
       <header className="Place__header">
