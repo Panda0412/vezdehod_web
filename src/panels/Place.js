@@ -26,6 +26,8 @@ const Place = ({ item, order, onIncrementPosition, onDecrementPosition, area }) 
     return accounting.formatNumber(result, 0, ' ');
   }, [ order, item ]);
 
+  console.log(price==='0');
+
   return (
     <div className="Place">
       <header className="Place__header">
@@ -101,9 +103,14 @@ const Place = ({ item, order, onIncrementPosition, onDecrementPosition, area }) 
         )))}
       </ul>
       <footer className="Place__footer">
-        <Link to={`/basket/${area.id}/${item.id}`} className="Place__order">
-          Оформить заказ ({price})
-        </Link>
+          {price === '0' ?
+              <Link to="/" className="disabled-link">
+                  Корзина пуста
+              </Link> :
+              <Link to={`/basket/${area.id}/${item.id}`} className="Place__order">
+                  Оформить заказ ({price})
+              </Link>
+          }
       </footer>
     </div>
   );
