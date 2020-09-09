@@ -134,6 +134,8 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
             onBlur={() => {
               if (time) {
                 setFaster(false);
+              } else {
+                setTime('00:00');
               }
             }}
           />
