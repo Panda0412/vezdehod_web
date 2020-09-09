@@ -126,6 +126,7 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
             value={time}
             onFocus={() => {
               setFaster(false);
+              setTime('00:00');
             }}
             onChange={event => {
               setFaster(false);
@@ -134,8 +135,6 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
             onBlur={() => {
               if (time) {
                 setFaster(false);
-              } else {
-                setTime('00:00');
               }
             }}
           />
