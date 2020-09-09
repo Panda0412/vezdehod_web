@@ -9,7 +9,8 @@ import './place.css';
 
 
 const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
-  const [ faster, setFaster ] = useState(localStorage.getItem('faster') === 'true');
+  const [ faster, setFaster ] = useState(localStorage.getItem('faster') ?
+      localStorage.getItem('faster') === 'true' : true);
   const [ time, setTime ] = useState(localStorage.getItem('time') || '');
   const [ selfService, setSelfService ] = useState(localStorage.getItem('selfService') === 'true');
   const area = foodAreas.filter(area => area.id === areaId)[0];
@@ -115,6 +116,7 @@ const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
             checked={faster}
             onToggle={() => {
               if (faster) {
+                setTime('00:00');
                 setFaster(false);
               } else {
                 setTime('');
