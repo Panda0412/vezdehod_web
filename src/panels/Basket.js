@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import accounting from 'accounting';
 
@@ -9,11 +9,15 @@ import './place.css';
 
 
 const Basket = ({ match: { params: { areaId, itemId }}, foodAreas, order }) => {
-  const [ faster, setFaster ] = useState(true);
-  const [ time, setTime ] = useState('');
-  const [ selfService, setSelfService ] = useState(false);
+  const [ faster, setFaster ] = useState(localStorage.getItem('faster') === 'true');
+  const [ time, setTime ] = useState(localStorage.getItem('time') || '');
+  const [ selfService, setSelfService ] = useState(localStorage.getItem('selfService') === 'true');
   const area = foodAreas.filter(area => area.id === areaId)[0];
   const item = area.items.filter(item => item.id === itemId)[0];
+
+  useEffect(() => {localStorage.setItem('faster', faster.toString())}, [faster]);
+  useEffect(() => {localStorage.setItem('time', time)}, [time]);
+  useEffect(() => {localStorage.setItem('selfService', selfService.toString())}, [selfService]);
 
   const [ price, products ] = useMemo(() => {
     const foodIds = new Set((item.foods || []).map(item => item.id));
